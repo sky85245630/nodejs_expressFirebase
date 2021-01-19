@@ -2,6 +2,19 @@ var express = require('express');
 var app = express();
 var engine = require('ejs-locals');
 var bodyParser = require('body-parser');
+//firebase
+var admin = require("firebase-admin");
+var serviceAccount = require("./nodejsqq-firebase-adminsdk-zieci-fa7aefceb6.json");
+admin.initializeApp({
+credential: admin.credential.cert(serviceAccount),
+databaseURL: "https://nodejsqq.firebaseio.com"
+});
+
+var fireData = admin.database();
+
+fireData.ref('asd').once('value',(snapshot)=>{
+   console.log('snapshotQQ',snapshot.val())
+})
 
 app.engine('ejs',engine);
 app.set('views','./views');
