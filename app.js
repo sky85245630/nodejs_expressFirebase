@@ -12,9 +12,21 @@ databaseURL: "https://nodejsqq.firebaseio.com"
 
 var fireData = admin.database();
 
-fireData.ref('asd').once('value',(snapshot)=>{
-   console.log('snapshotQQ',snapshot.val())
-})
+//取得firebase asd裡面的資料 
+// fireData.ref('asd').once('value',(e)=>{
+//    console.log('snapshotQQ',e.val())
+// })
+
+//把資料傳入firebase asd裡面
+fireData.ref('asd').set({"keyQQ":"valueQQ"}).then(
+   ()=>{
+      fireData.ref('asd').once('value',(e)=>{
+         console.log('已寫入',e.val())
+         })
+   }
+   
+)
+
 
 app.engine('ejs',engine);
 app.set('views','./views');
